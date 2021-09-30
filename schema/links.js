@@ -1,4 +1,27 @@
 const mongoose=require('mongoose')
+const ReviewModel=new mongoose.Schema({
+    email:{type:String},
+    rating:{
+        type:Number,
+        required:true,
+    },
+    text:{
+        type:String,
+        required:true,
+    }
+})
+const GeoSchema=new mongoose.Schema({
+    type:
+    {
+        type:String,
+        default:"Point"
+
+    },
+    coordinates:
+    {
+        type:[Number]
+    }
+})
 
 const LinkModel=new mongoose.Schema({
     email:{type:String,unique:true},
@@ -15,7 +38,7 @@ const LinkModel=new mongoose.Schema({
     Cover:{type:String},
     City:{type:String},
     isloggedin:{type:Boolean,default:true},
-    Location:[{type:Number}],//longitude,latitude
+    geometry:GeoSchema,
     Complete_address:{type:String},
     Contact_Number:{type:Number},
     Tags:[{type:String}],

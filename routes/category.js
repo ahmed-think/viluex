@@ -68,7 +68,7 @@ router.get('/viewall',(req,res)=>{
              }},
              {$match:{item:{$ne:[]}}},
              {$match:{status:"unblock"}},
-             {$project: { "item": 0,subcat:0} } 
+             {$project: { "links": 0,Category:0} } 
         
      ])
     //  .populate('subcat')

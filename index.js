@@ -13,7 +13,48 @@ db.on('open', () => {
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+const link=require('./schema/links')
+const cat=require('./schema/category')
+app.get('/home',(req,res)=>{
+    link.find()
+    .sort({ratings:-1})
+    .limit(3)
+    .exec((er,tr)=>{
+        if(err) res.json(error(er))
+        else{
+            cat.find()
+            .exec((Er,info)=>{
+                if(Er) res.json(error(Er))
+                else{
+                    link.find()
+                    .sort({created_date:-1})
+                    .limit(3)
+                    .exec((Err,Doc)=>{
+                        if(Err) res.json(error(Err))
+                        else{
+                             link.find({
+                            geometry: {
+                              $nearSphere: {
+                                $geometry: {
+                                  type: 'Point',
+                                  coordinates: [longitude, latitude], //longitude and latitude
+                                },
+                                $minDistance: 0,
+                                $maxDistance: 10 * 1000,
+                              },
+                            },
+                          })
+                          .exec((err,doc)=>{
+                              if(err) res.json(error(err))
+                              else res.jsonp(success({toprated:tr,categories:info,newly_added:Doc,nearby:doc}))
+                          })
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => { console.log(`Server started at port ${PORT}`) })
 

@@ -171,3 +171,67 @@ router.post('/adddetails',(req,res)=>{
         }
     })
 })
+
+router.post('/viewsingle',(req,res)=>{
+    link.findById(req.body.id)
+    .exec((err,doc)=>{
+        if (err) {
+            res.json(error(err))
+        } else {
+            res.json(success(doc))
+        }
+    })
+})
+
+//view busnis by cat
+router.post('/viewbycat',(req,res)=>{
+    link.find({Category:req.body.catid})
+    .exec((err,doc)=>{
+        if (err) {
+            res.json(error(err))
+        } else {
+            res.json(success(doc))
+        }
+    })
+})
+
+
+router.post('/seereviews', (req, res) => {
+    link.findById(req.body.id)
+        .exec((err, doc) => {
+            if (err) res.json(error(err))
+            else res.json(success(doc.reviews))
+        })
+})
+router.post('/addreview',(req,res)=>{
+    link.findByIdAndUpdate(req.body.linkid,{status:"rewieved"},{new:true})
+    .exec((er,info)=>{
+      if(er) res.json(error(er))
+      else{
+        let data={
+          email:req.body.email,
+          rating:req.body.rating,
+          text:req.body.text
+        }
+        link.findByIdAndUpdate(info._id,{$push:{reviews:data}},{new:true})
+        .exec((err,doc)=>{
+          if(err) res.json(error(err));
+          else {
+            let rate=doc.reviews.map(r=>{
+              return r.rating
+            }).reduce((a,b)=>{
+              return a+b
+            })
+            let raating=rate/doc.reviews.length
+            link.findByIdAndUpdate(doc._id,{ratings:raating},{new:true}) 
+            .exec((Er,Doc)=>{
+              if(Er) res.json(error(Er))
+              else{
+                res.json(success(doc.reviews));
+              }
+            })
+          }
+        })
+      }
+    })
+  })
