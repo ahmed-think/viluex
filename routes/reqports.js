@@ -33,7 +33,7 @@ router.post('/viewsingle',(req,res)=>{
 })
 
 
-router.post('/viewall',(req,res)=>{
+router.get('/viewall',(req,res)=>{
     report.find()
     .populate('linkid')
     .exec((err,doc)=>{

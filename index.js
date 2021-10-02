@@ -13,6 +13,9 @@ db.on('open', () => {
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use('/link',require('./routes/links'))
+app.use('/category',require('./routes/category'))
+app.use('/report',require('./routes/reqports'))
 const link=require('./schema/links')
 const cat=require('./schema/category')
 app.get('/home',(req,res)=>{

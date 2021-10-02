@@ -23,6 +23,13 @@ const GeoSchema=new mongoose.Schema({
     }
 })
 
+const WorkingModel=new mongoose.Schema({
+    day:{type:String},
+    is_opened:{type:Boolean},
+    opening_hour:{type:String,min:"00:00",max:"23:59"},
+    closing_hour:{type:String,min:"00:00",max:"23:59"},
+})
+
 const LinkModel=new mongoose.Schema({
     email:{type:String,unique:true},
     Category:{type:mongoose.Schema.Types.ObjectId,ref:'catagories'},
@@ -32,8 +39,7 @@ const LinkModel=new mongoose.Schema({
     Description:{type:String},
     Starting_price:{type:Number},
     Amenities:[{type:String}],
-    Opening :{type:String},
-    closinghours:{type:String},
+   working_hours:[WorkingModel],
     Images:[{type:String}],
     Cover:{type:String},
     City:{type:String},

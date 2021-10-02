@@ -1,0 +1,645 @@
+{
+	"info": {
+		"_postman_id": "748caa81-f28f-48de-a31b-1d349149b37c",
+		"name": "VILUEX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "links",
+			"item": [
+				{
+					"name": "add link",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"ahmed.afridi091@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otpid\":\"615867edfcc0f63f4292ae31\",\r\n    \"otp\":\"l4wyku\",\r\n    \"email\":\"ahmed.afridi091@gmail.com\",\r\n    \"pass\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/verify",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"ahmed.afridi091@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/forgetpasword",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"forgetpasword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify after forget password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otpid\":\"61586ac61a48bf7a9646a4e4\",\r\n    \"email\":\"ahmed.afridi091@gmail.com\",\r\n    \"otp\":\"ttr5n5\",\r\n    \"pass\":\"aasdaa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/verifyforget",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"verifyforget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"ahmed.afridi091@gmail.com\",\r\n    \"pasword\":\"aasda\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add pics",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/THINK SOLUTIONZ/JET/example.png"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/THINK SOLUTIONZ/JET/example.png"
+								},
+								{
+									"key": "hid",
+									"value": "615868fd1790ecc2113c8c76",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/link/addpics",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"addpics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Images",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\",\r\n    \"pictures\":[\"9c500d20361721ece8c327ba24d22dea\",\"19d0e39e5624902cba099ac5772ba415\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/removepics",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"removepics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add cover",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/THINK SOLUTIONZ/JET/example.png"
+								},
+								{
+									"key": "hid",
+									"value": "615868fd1790ecc2113c8c76",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/link/addcover",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"addcover"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove cover",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\",\r\n    \"cover\":\"d0ebef08af54467f6eb9284bae47bd8a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/removecover",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"removecover"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add title",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\",\r\n    \"title\":\"Ahmed travels\",\r\n    \"catid\":\"6158760fe7b0ab8860501e73\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/addtitle",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"addtitle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\",\r\n    \"Short_description\":\"sdasdasdas\",\r\n\"Description\":\"scasdsa\",\r\n\"Starting_price\":213,\r\n\"Amenities\":[\"sadas\"],\r\n\"working_hours\":[\r\n    {\"day\":\"monday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},\r\n{\"day\":\"tuesday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"wednesday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"thursday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"friday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"saturday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"sunday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n}\r\n],\r\n\"City\":\"karachi\",\r\n\"geometry\":{\r\n    \"coordinates\":[2.331,11.222]\r\n},\r\n\"Complete_address\":\"w3dsadasd\",\r\n\"Contact_Number\":23123123,\r\n\"Tags\":[\"#dasdas\",\"#dasdaaa\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/adddetails",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"adddetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view single",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/viewsingle",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"viewsingle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view links by category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"catid\":\"6158760fe7b0ab8860501e73\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/viewbycat",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"viewbycat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"linkid\":\"615868fd1790ecc2113c8c76\",\r\n    \"email\":\"rashid.sj91@gmail.com\",\r\n    \"rating\":3,\r\n    \"text\":\"dasdasa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/addreview",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"addreview"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "see reviews",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/link/seereviews",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"link",
+								"seereviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view by filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "add category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "sadsss",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/THINK SOLUTIONZ/JET/example.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/category/addcat",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"addcat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"61587ef2fad802744685a00d\",\r\n    \"status\":\"unblock\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/category/statuschange",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"statuschange"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/category/viewall",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"viewall"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view all admin view",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/category/viewadmin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"viewadmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "report",
+			"item": [
+				{
+					"name": "add report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reason\":\"asdsad\",\r\n\"comments\":\"dasdasda\",\r\n\"email\":\"rashid.sj91@gmail.com\",\r\n\"linkid\":\"615868fd1790ecc2113c8c76\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/report/addreport",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"report",
+								"addreport"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view singe report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"6158817e28cc00f9214a7650\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/report/viewsingle",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"report",
+								"viewsingle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view all reports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/report/viewall",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"report",
+								"viewall"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

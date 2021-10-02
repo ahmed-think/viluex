@@ -20,16 +20,16 @@ router.post('/addcat',upload.single('image'),(req,res)=>{
     })
 })
 //busness
-router.post('/viewsingle',(req,res)=>{
-    cat.findById(req.body.id,)
-    .exec((err,doc)=>{
-        if (err) {
-            res.json(error(err))
-        } else {
-            res.json(success(doc))            
-        }
-    })
-})
+// router.post('/viewsingle',(req,res)=>{
+//     cat.findById(req.body.id,)
+//     .exec((err,doc)=>{
+//         if (err) {
+//             res.json(error(err))
+//         } else {
+//             res.json(success(doc))            
+//         }
+//     })
+// })
 
 router.post('/statuschange',(req,res)=>{
     cat.findById(req.body.id)
@@ -37,7 +37,7 @@ router.post('/statuschange',(req,res)=>{
         if (er) {
             res.json(error(er))
         } else {
-            if(doc.status==req.body.status)
+            if(info.status==req.body.status)
             {
                 res.json(success(`status is alrady ${req.body.status}`))
             }
@@ -77,3 +77,12 @@ router.get('/viewall',(req,res)=>{
             else  return res.json({msg:"success",data:doc})
      })
 })
+
+router.get('/viewadmin',(req,res)=>{
+    cat.find()
+    .exec((err,doc)=>{
+        if(err) res.json(error(err))
+        else res.json(success(doc))
+    })
+})
+module.exports=router

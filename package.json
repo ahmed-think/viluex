@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "strt": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^6.0.8",
-    "nodemon": "^2.0.13"
+    "multer": "^1.4.3",
+    "nodemailer": "^6.6.5",
+    "nodemon": "^2.0.13",
+    "otp-generator": "^2.0.1"
   }
 }
