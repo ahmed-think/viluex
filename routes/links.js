@@ -3,11 +3,14 @@ const router = express.Router()
 const error = require('../handle function/error')
 const success = require('../handle function/handlesucces')
 const link = require('../schema/links')
-const  crypto = require('crypto');
-const  fs = require('fs');
+const crypto = require('crypto');
+const fs = require('fs');
+const uuid = require('uuid');
 const otpGenerator = require('otp-generator')
 const multer = require('multer');
 const nodemailer = require('nodemailer');
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId
 const otpp = require('../schema/opt');
 var upload = multer({ dest: __dirname + '/../../images/' });
 const encrypt = function (pass) {
@@ -63,7 +66,6 @@ router.post('/verify', (req, res) => {
         if (doc.otp == req.body.otp) {
           let data = {
             email: req.body.email,
-         pasword: encrypt(req.body.pass)
           }
           link.create(data, (er, dc) => {
             if (er) {
@@ -75,6 +77,13 @@ router.post('/verify', (req, res) => {
         }
       }
     })
+})
+router.post('/getpasword',(req,res)=>{
+  link.findByIdAndUpdate(req.body.id,{pasword:encrypt(req.body.pass)},{new:true})
+  .exec((err,doc)=>{
+    if(err) res.json(error(err))
+    else res.json(success(doc))
+  })
 })
 router.post('/forgetpasword', (req, res) => {
   if (req.body.email !== null) {
@@ -117,14 +126,7 @@ router.post('/verifyforget', (req, res) => {
       if (err) res.json({ msg: "failed finding otp", data: err });
       else {
         if (doc.otp == req.body.otp) {
-          link.findOneAndUpdate({ email: req.body.email }, { pasword: encrypt(req.body.pass) }, { new: true })
-            .exec((er, dc) => {
-              if (er) {
-                res.json(error(er))
-              } else {
-                res.json(success(dc))
-              }
-            })
+          res.json(success("otp verified"))
         }
       }
     })
@@ -187,18 +189,18 @@ router.post('/removecover', (req, res) => {
     .exec((err, doc) => {
       if (err) res.json(error(err))
       else {
-          if (req.body.cover !== undefined) {
-             fs.unlink('upload' + '/../../images/' + req.body.cover, (eror) => {
-              if (error) {
-                res.json(error(eror))
-              }
-            })
-            res.json(success(doc))
-          }
-          else {
-            res.json(error("File can not be null"))
-          }
+        if (req.body.cover !== undefined) {
+          fs.unlink('upload' + '/../../images/' + req.body.cover, (eror) => {
+            if (error) {
+              res.json(error(eror))
+            }
+          })
+          res.json(success(doc))
         }
+        else {
+          res.json(error("File can not be null"))
+        }
+      }
     })
 })
 
@@ -214,7 +216,7 @@ router.post('/addpics', upload.array('image'), (req, res) => {
     })
 })
 router.post('/addcover', upload.single('image'), (req, res) => {
-  link.findByIdAndUpdate(req.body.hid, { Cover:req.file.filename }, { new: true })
+  link.findByIdAndUpdate(req.body.hid, { Cover: req.file.filename }, { new: true })
     .exec((err, doc) => {
       if (err) res.json(error(err))
       else res.json(success(doc))
@@ -233,6 +235,9 @@ router.post('/addtitle', (req, res) => {
 })
 
 router.post('/adddetails', (req, res) => {
+  let data= req.body
+  data.list_id=uuid.v4()
+  console.log(data);
   link.findByIdAndUpdate(req.body.id, req.body, { new: true })
     .exec((err, doc) => {
       if (err) {
@@ -308,91 +313,265 @@ router.post('/addreview', (req, res) => {
 })
 
 //view items of single brand with sort or without sort
-router.post('/viewlinks', (req, res) => {
-  if (req.body.action === "category") {
-    link.find({ Category: req.body.action })
-      .limit(10)
-      .exec((err, doc) => {
-        if (err) console.log(err);
-        else res.json({ msg: "success", data: doc })
-      })
+// router.post('/viewlinks', (req, res) => {
+//   if (req.body.action === "category") {
+//     link.find({ Category: req.body.action })
+//       .limit(10)
+//       .exec((err, doc) => {
+//         if (err) console.log(err);
+//         else res.json({ msg: "success", data: doc })
+//       })
+//   }
+//   else if (req.body.action === "price range") {
+//     link.find({ Starting_price: { $lte: req.body.upper, $gte: req.body.lower } })
+//       .limit(10)
+//       .exec((err, doc) => {
+//         if (err) console.log(err);
+//         else res.json({ msg: "success", data: doc })
+//       })
+//   }
+//   else if (req.body.action === "high-low") {
+//     link.find()
+//       .sort({ Starting_price: -1 })
+//       .limit(10)
+//       .exec((err, doc) => {
+//         if (err) console.log(err);
+//         else res.json({ msg: "success", data: doc })
+//       })
+//   }
+//   else if (req.body.action === "low-high") {
+//     link.find()
+//       .sort({ Starting_price: 1 })
+//       .limit(10)
+//       .exec((err, doc) => {
+//         if (err) console.log(err);
+//         else res.json({ msg: "success", data: doc })
+//       })
+//   }
+//   else if (req.body.action === "newest-to-oldest") {
+//     link.find()
+//       .sort({ created_date: -1 })
+//       .limit(10)
+//       .exec((err, doc) => {
+//         if (err) console.log(err);
+//         else res.json({ msg: "success", data: doc })
+//       })
+//   }
+//   else if (req.body.action === "oldest-to-newest") {
+//     link.find()
+//       .sort({ created_date: 1 })
+//       .limit(10)
+//       .exec((err, doc) => {
+//         if (err) console.log(err);
+//         else res.json({ msg: "success", data: doc })
+//       })
+//   }
+//   else if (req.body.action === "Distance range") {
+//     if (req.body.longitude !== undefined && req.body.latitude !== undefined) {
+//       let { longitude, latitude } = req.body
+//       car.find({
+//         geometry: {
+//           $nearSphere: {
+//             $geometry: {
+//               type: 'Point',
+//               coordinates: [longitude, latitude], //longitude and latitude
+//             },
+//             $minDistance: 0,
+//             $maxDistance: 10 * 1000,
+//           },
+//         },
+//       })
+//         .limit(4)
+//         .exec((err, docs) => {
+//           if (err) return res.json(error(err));
+//           else return res.json(success(docs));
+//         });
+//     } else {
+//       return res.json('Location can not be null')
+//     }
+//   }
+//   else {
+//     link.find()
+//       .limit(10)
+//       .exec((err, doc) => {
+//         if (err) console.log(err);
+//         else res.json({ msg: "success", data: doc })
+//       })
+//   }
+// })
+router.post('/filter', (req, res) => {
+  let { longitude, latitude } = req.body
+  let  day
+  var today = new Date();
+var time = today.getHours()
+  switch (new Date().getDay()) {
+    case 0:
+      day = "Sunday";
+      break;
+    case 1:
+      day = "Monday";
+      break;
+    case 2:
+      day= "tuesday";
+      break;
+    case 3:
+      day = "Wednesday";
+      break;
+    case 4:
+      day = "Thursday";
+      break;
+    case 5:
+      day = "Friday";
+      break;
+    case 6:
+      day = "Saturday";
   }
-  else if (req.body.action === "price range") {
-    link.find({ Starting_price: { $lte: req.body.upper, $gte: req.body.lower } })
-      .limit(10)
-      .exec((err, doc) => {
-        if (err) console.log(err);
-        else res.json({ msg: "success", data: doc })
-      })
-  }
-  else if (req.body.action === "high-low") {
-    link.find()
-      .sort({ Starting_price: -1 })
-      .limit(10)
-      .exec((err, doc) => {
-        if (err) console.log(err);
-        else res.json({ msg: "success", data: doc })
-      })
-  }
-  else if (req.body.action === "low-high") {
-    link.find()
-      .sort({ Starting_price: 1 })
-      .limit(10)
-      .exec((err, doc) => {
-        if (err) console.log(err);
-        else res.json({ msg: "success", data: doc })
-      })
-  }
-  else if (req.body.action === "newest-to-oldest") {
-    link.find()
-      .sort({ created_date: -1 })
-      .limit(10)
-      .exec((err, doc) => {
-        if (err) console.log(err);
-        else res.json({ msg: "success", data: doc })
-      })
-  }
-  else if (req.body.action === "oldest-to-newest") {
-    link.find()
-      .sort({ created_date: 1 })
-      .limit(10)
-      .exec((err, doc) => {
-        if (err) console.log(err);
-        else res.json({ msg: "success", data: doc })
-      })
-  }
-  else if (req.body.action === "Distance range") {
-    if (req.body.longitude !== undefined && req.body.latitude !== undefined) {
-      let { longitude, latitude } = req.body
-      car.find({
-        geometry: {
-          $nearSphere: {
-            $geometry: {
-              type: 'Point',
-              coordinates: [longitude, latitude], //longitude and latitude
-            },
-            $minDistance: 0,
-            $maxDistance: 10 * 1000,
+  if(req.body.status=="open"){
+    console.log(day);
+    console.log(time);
+    link.find({
+      Category: new ObjectId(req.body.catid), 
+      Starting_price: { $lte: req.body.higher, $gte: 0 },
+      geometry: {
+        $nearSphere: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [longitude, latitude], //longitude and latitude
           },
+          $minDistance: 0,
+          $maxDistance: req.body.dis * 1000,
         },
-      })
-        .limit(4)
-        .exec((err, docs) => {
-          if (err) return res.json(error(err));
-          else return res.json(success(docs));
-        });
-    } else {
-      return res.json('Location can not be null')
-    }
-  }
-  else {
-    link.find()
-      .limit(10)
+      },
+      // "$working_hours.day":day,
+      // working_hours:{"$.opening_hour":{$lte:time,},"$.closing_hour":{gt:time}}
+      working_hours: {$elemMatch: {day:day, opening_hour:{$lte:time}, closing_hour:{$gte:time}}}
+    })
+    .sort({ Starting_price: req.body.sort })
+    .sort({created_date: req.body.date})
       .exec((err, doc) => {
         if (err) console.log(err);
-        else res.json({ msg: "success", data: doc })
+        else {
+          let addrs=doc.map(element=>{
+            return{
+              name:element.Title,
+              longitude:element.geometry.coordinates[0],
+              latitude:element.geometry.coordinates[1]
+            }
+          })
+          console.log(doc);
+          res.json(success({addrs,doc}))
+        }
       })
+  }else{
+    link.find({
+      Category: new ObjectId(req.body.catid), 
+      Starting_price: { $lte: req.body.higher, $gte: 0 },
+      geometry: {
+        $nearSphere: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [longitude, latitude], //longitude and latitude
+          },
+          $minDistance: 0,
+          $maxDistance: 10 * 1000,
+        },
+      }
+    })
+    .sort({ Starting_price: req.body.sort })
+    .sort({created_date: req.body.date})
+      .exec((err, doc) => {
+        if (err) console.log(err);
+        else {
+          let addrs=doc.map(element=>{
+            return{
+              name:element.Title,
+              longitude:element.geometry.coordinates[0],
+              latitude:element.geometry.coordinates[1]
+            }
+          })
+          console.log(doc);
+          res.json(success({addrs,doc}))
+        }
+      }) 
   }
 })
 
+
+router.post('/statuschange',(req,res)=>{
+  link.findById(req.body.id)
+  .exec((er,info)=>{
+      if (er) {
+          res.json(error(er))
+      } else {
+          if(info.status==req.body.status)
+          {
+              res.json(success(`status is alrady ${req.body.status}`))
+          }
+          else{
+              link.findByIdAndUpdate(req.body.id,{status:req.body.status},{new:true})
+              .exec((err,doc)=>{
+                  if (err) {
+                      res.json(error(err))
+                  }
+                  else{
+                      res.json(success(doc))
+                  }
+              })
+
+          }
+      }
+  })
+})
+router.post('/update', (req, res) => {
+  link.findByIdAndUpdate(req.body.id, req.body, { new: true })
+    .exec((err, doc) => {
+      if (err) {
+        res.json(error(err))
+      } else {
+        res.json(success(doc))
+      }
+    })
+})
+router.post('/search',(req,res)=>{
+  link.find({ Title: { $regex: req.body.text, $options: 'i' } })
+  .limit(10)
+  .exec((err,doc)=>{
+    if(err) res.json(error(err))
+    else {
+      let addrs=doc.map(element=>{
+        return{
+          name:element.Title,
+          longitude:element.geometry.coordinates[0],
+          latitude:element.geometry.coordinates[1]
+        }
+      })
+      res.json(success({addrs,doc}))
+    }
+  })
+})
+
+router.post('/searchloc',(req,res)=>{
+  if (req.body.longitude !== undefined && req.body.latitude !== undefined) {
+          let { longitude, latitude } = req.body
+          link.find({
+            geometry: {
+              $nearSphere: {
+                $geometry: {
+                  type: 'Point',
+                  coordinates: [longitude, latitude], //longitude and latitude
+                },
+                $minDistance: 0,
+                $maxDistance: 25 * 1000,
+              },
+            },
+          })
+            .limit(8)
+            .exec((err, docs) => {
+              if (err) return res.json(error(err));
+              else return res.json(success(docs));
+            });
+        } else {
+          return res.json(error('Location can not be null'))
+        }
+})
 module.exports = router
