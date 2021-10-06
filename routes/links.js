@@ -66,6 +66,7 @@ router.post('/verify', (req, res) => {
         if (doc.otp == req.body.otp) {
           let data = {
             email: req.body.email,
+            list_id:uuid.v4()
           }
           link.create(data, (er, dc) => {
             if (er) {
@@ -235,9 +236,7 @@ router.post('/addtitle', (req, res) => {
 })
 
 router.post('/adddetails', (req, res) => {
-  let data= req.body
-  data.list_id=uuid.v4()
-  console.log(data);
+ 
   link.findByIdAndUpdate(req.body.id, req.body, { new: true })
     .exec((err, doc) => {
       if (err) {
