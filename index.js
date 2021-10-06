@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
 
-const mongoDB = 'mongodb://localhost/viluex';
+const mongoDB='mongodb://viluexasasaddsad:dasd8as9DsdaASDADsas9d@75.119.139.19:27913/viluex';
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 //Get the default connection
 var db = mongoose.connection;
@@ -58,7 +58,7 @@ app.get('/home',(req,res)=>{
         }
     })
 })
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4004
 app.listen(PORT, () => { console.log(`Server started at port ${PORT}`) })
 
 
