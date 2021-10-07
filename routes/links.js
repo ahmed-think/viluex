@@ -3,6 +3,7 @@ const router = express.Router()
 const error = require('../handle function/error')
 const success = require('../handle function/handlesucces')
 const link = require('../schema/links')
+const cat = require('../schema/category')
 const crypto = require('crypto');
 const fs = require('fs');
 const uuid = require('uuid');
@@ -79,7 +80,7 @@ router.post('/verify', (req, res) => {
       }
     })
 })
-router.post('/getpasword',(req,res)=>{
+router.post('/ ',(req,res)=>{
   link.findByIdAndUpdate(req.body.id,{pasword:encrypt(req.body.pass)},{new:true})
   .exec((err,doc)=>{
     if(err) res.json(error(err))
@@ -572,5 +573,59 @@ router.post('/searchloc',(req,res)=>{
         } else {
           return res.json(error('Location can not be null'))
         }
+})
+let bulk=require('../MOCK_DATA.json')
+//BULK ROUTE
+router.get('/adcat',(req,res)=>{
+cat.find()
+.exec((err,doc)=>{
+  for (let i = 0; i < 150; i++) {
+    bulk[i].working_hours= [
+      {
+          "day": "monday",
+          "is_opened": true,
+          "opening_hour": "11:00",
+          "closing_hour": "23:00"
+      },
+      {
+          "day": "tuesday",
+          "is_opened": true,
+          "opening_hour": "11:00",
+          "closing_hour": "23:00"
+      },
+      {
+          "day": "wednesday",
+          "is_opened": true,
+          "opening_hour": "11:00",
+          "closing_hour": "23:00"
+      },
+      {
+          "day": "thursday",
+          "is_opened": true,
+          "opening_hour": "11:00",
+          "closing_hour": "23:00"
+      },
+      {
+          "day": "friday",
+          "is_opened": true,
+          "opening_hour": "11:00",
+          "closing_hour": "23:00"
+      },
+      {
+          "day": "saturday",
+          "is_opened": true,
+          "opening_hour": "11:00",
+          "closing_hour": "23:00"
+      },
+      {
+          "day": "sunday",
+          "is_opened": true,
+          "opening_hour": "11:00",
+          "closing_hour": "23:00"
+      }
+  ]
+  bulk[i].Category=doc[0]._id
+  }
+})
 })
 module.exports = router
