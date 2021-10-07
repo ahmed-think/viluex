@@ -579,7 +579,7 @@ let bulk=require('../MOCK_DATA.json')
 router.get('/adcat',(req,res)=>{
 cat.find()
 .exec((err,doc)=>{
-  for (let i = 0; i < 150; i++) {
+  for (let i = req.body.start; i < req.body.limit; i++) {
     bulk[i].working_hours= [
       {
           "day": "monday",
@@ -624,8 +624,12 @@ cat.find()
           "closing_hour": "23:00"
       }
   ]
-  bulk[i].Category=doc[0]._id
+  bulk[i].Category=doc[req.body.numb]._id
+  link.create(bulk[i],(er,dc)=>{
+    if(er) res.json(error(er))
+  })
   }
+
 })
 setTimeout(() => {
   res.json(success("done"))
