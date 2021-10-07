@@ -579,60 +579,95 @@ let bulk=require('../MOCK_DATA.json')
 router.get('/adcat',(req,res)=>{
 cat.find()
 .exec((err,doc)=>{
-  for (let i = req.body.start; i < req.body.limit; i++) {
-    bulk[i].working_hours= [
+  for (let i = 880; i <1000; i++) {
+    let data=bulk[i]
+    data.list_id=uuid.v4()
+    data.working_hours= [
       {
-          "day": "monday",
+          "day": "Monday",
           "is_opened": true,
-          "opening_hour": "11:00",
-          "closing_hour": "23:00"
+          "opening_hour": 11,
+          "closing_hour": 23
       },
       {
-          "day": "tuesday",
+          "day": "Tuesday",
           "is_opened": true,
-          "opening_hour": "11:00",
-          "closing_hour": "23:00"
+          "opening_hour": 11,
+          "closing_hour": 23
       },
       {
-          "day": "wednesday",
+          "day": "Wednesday",
           "is_opened": true,
-          "opening_hour": "11:00",
-          "closing_hour": "23:00"
+          "opening_hour": 11,
+          "closing_hour": 23
       },
       {
-          "day": "thursday",
+          "day": "Thursday",
           "is_opened": true,
-          "opening_hour": "11:00",
-          "closing_hour": "23:00"
+          "opening_hour": 11,
+          "closing_hour": 23
       },
       {
-          "day": "friday",
+          "day": "Friday",
           "is_opened": true,
-          "opening_hour": "11:00",
-          "closing_hour": "23:00"
+          "opening_hour": 11,
+          "closing_hour": 23
       },
       {
-          "day": "saturday",
+          "day": "Saturday",
           "is_opened": true,
-          "opening_hour": "11:00",
-          "closing_hour": "23:00"
+          "opening_hour": 11,
+          "closing_hour": 23
       },
       {
-          "day": "sunday",
+          "day": "Sunday",
           "is_opened": true,
-          "opening_hour": "11:00",
-          "closing_hour": "23:00"
+          "opening_hour": 11,
+          "closing_hour": 23
       }
   ]
-  bulk[i].Category=doc[req.body.numb]._id
-  link.create(bulk[i],(er,dc)=>{
+  data.Category=doc[6]._id
+  data.Starting_price=Math.floor(Math.random() * 1000) + 1
+  link.create(data,(er,dc)=>{
     if(er) res.json(error(er))
+  else console.log("do");
   })
   }
 
 })
 setTimeout(() => {
   res.json(success("done"))
-}, 3000);
+}, 10000);
+})
+
+router.get('/o',(req,res)=>{
+  link.find()
+  .exec((err,doc)=>{
+    if(err) res.send(err)
+    else res.send(doc)
+  })
+})
+
+router.get('/ad',(req,res)=>{
+  link.find()
+  .exec((er,dc)=>{
+    if(er) res.json(error(er))
+    else {
+      dc.forEach(element => {
+        element.geometry={coordinates:[Math.random() * 17,Math.random() * 17]}
+      });
+    }
+  })
+  setTimeout(() => {
+    res.json(success("done"))
+  }, 20000);
+})
+
+router.get('/c',(req,res)=>{
+  link.find()
+  .exec((err,doc)=>{
+    if(err) res.send(err)
+    else res.send(doc)
+  })
 })
 module.exports = router
