@@ -627,5 +627,8 @@ cat.find()
   bulk[i].Category=doc[0]._id
   }
 })
+setTimeout(() => {
+  res.json(success("done"))
+}, 3000);
 })
 module.exports = router
