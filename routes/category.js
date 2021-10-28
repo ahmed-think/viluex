@@ -122,18 +122,84 @@ console.log(pdate);
 })
 })
  router.get('/totalperday',(req,res)=>{
-    list.aggregate( [
-        {
-          $group: {
-             _id: "$created_date",
-             count: { $count: { } }
-          }
-        }
-      ] )
-      .exec((err,doc)=>{
-          if(err) res.json(error(err))
-          else res.json(success(doc))
-      })
+    let dates=[]
+    let values=[]
+    for (let i = 0; i < 30; i++) {
+            if(dates.length==0){
+            var to = new Date()
+            var priorDate = new Date().setDate(to.getDate()-i)
+            var pdate = new Date(priorDate)
+            let date = ("0" + pdate.getDate()).slice(-2);
+     let month = ("0" + (pdate.getMonth() + 1)).slice(-2);
+     
+     // current year
+     let year = to.getFullYear();
+     let today=new Date(`${year}-${month}-${date}`)
+             dates.push(today)
+             list.aggregate( [
+                 {$match:{created_date:{$gte:today}}},
+                 {
+                   $group: {
+                      _id: "$created_date",
+                      count: { $count: { } }
+                   }
+                 }
+               ] )
+               .exec((err,doc)=>{
+                if(err) res.json(error(err))
+                    doc.forEach(val=>{
+                        if(val!==undefined){
+                            let numb
+                    val.forEach(value=> {
+                        numb+=value.count
+                    } )
+                 values.push(numb)
+                        }
+                    })
+               })
+         }
+        else {
+                var to = new Date()
+                var priorDate = new Date().setDate(to.getDate()-i)
+                var pdate = new Date(priorDate)
+                let date = ("0" + pdate.getDate()).slice(-2);
+         let month = ("0" + (pdate.getMonth() + 1)).slice(-2);
+         
+         // current year
+         let year = to.getFullYear();
+         let today=new Date(`${year}-${month}-${date}`)
+                 dates.push(today)
+                 list.aggregate( [
+                     {$match:{created_date:{$gte:today,$lte:dates[i-1]}}},
+                     {
+                       $group: {
+                          _id: "$created_date",
+                          count: { $count: { } }
+                       }
+                     }
+                   ] )
+                   .exec((err,doc)=>{
+                       let numb
+                       res.send(doc);
+
+                    doc.forEach(val=>{
+                        if(val!==undefined){
+                            // console.log(val.count);
+                    // val.forEach(value=> {
+                    //     numb+=value.count
+                    // } )
+                        numb+=val.count
+
+                 values.push(numb)
+                        }
+                    })
+                   })
+             }
+    }
+
+    setTimeout(() => {
+        res.json(success({dates:dates,value:values}))
+    }, 3000);
  })
 
  router.get('/getcat',(req,res)=>{

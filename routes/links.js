@@ -81,7 +81,7 @@ router.post('/verify', (req, res) => {
       }
     })
 })
-router.post('/ ',(req,res)=>{
+router.post('/getpasword',(req,res)=>{
   link.findByIdAndUpdate(req.body.id,{pasword:encrypt(req.body.pass)},{new:true})
   .exec((err,doc)=>{
     if(err) res.json(error(err))
@@ -541,14 +541,19 @@ router.post('/search',(req,res)=>{
   .exec((err,doc)=>{
     if(err) res.json(error(err))
     else {
-      let addrs=doc.map(element=>{
-        return{
-          name:element.Title,
-          longitude:element.geometry.coordinates[0],
-          latitude:element.geometry.coordinates[1]
-        }
-      })
-      res.json(success({addrs,doc}))
+      if(doc!==undefined){
+        let addrs=doc.map(element=>{
+          return{
+            name:element.Title,
+            longitude:element.geometry.coordinates[0],
+            latitude:element.geometry.coordinates[1]
+          }
+        })
+        res.json(success({addrs,doc}))
+      }
+      else{
+        res.json(success("not found try something else"))
+      }
     }
   })
 })
@@ -573,7 +578,15 @@ router.post('/searchloc',(req,res)=>{
             .limit(8)
             .exec((err, docs) => {
               if (err) return res.json(error(err));
-              else return res.json(success(docs));
+              else {
+                let addrs=doc.map(element=>{
+                return{
+                  name:element.Title,
+                  longitude:element.geometry.coordinates[0],
+                  latitude:element.geometry.coordinates[1]
+                }
+              })
+              res.json(success({addrs,doc}))}
             });
         } else {
           return res.json(error('Location can not be null'))
