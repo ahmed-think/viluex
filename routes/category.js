@@ -161,4 +161,26 @@ console.log(pdate);
           else  return res.json({msg:"success",data:doc})
    })
  })
+
+ router.get('/viewallcategories',(req,res)=>{
+     cat.find({},(err,doc)=>{
+         if(err){
+             return res.json(error(err))
+         }
+         else{
+             return res.json(success(doc))
+         }
+     })
+ })
+
+ router.delete('/deletecategory',(req,res)=>{
+     cat.findByIdAndDelete(req.body.id,(err,doc)=>{
+         if(err){
+             return res.json(error(err))
+         }
+         else{
+             return res.json(success(doc))
+         }
+     })
+ })
 module.exports=router

@@ -23,6 +23,12 @@ const GeoSchema = new mongoose.Schema({
     }
 })
 
+const amenitySchema=new mongoose.Schema
+({
+    amenityId:{type:mongoose.Schema.Types.ObjectId,ref:"amenities"},
+    notes:String
+})
+
 const WorkingModel = new mongoose.Schema({
     day: { type: String },
     is_opened: { type: Boolean },
@@ -33,14 +39,15 @@ const WorkingModel = new mongoose.Schema({
 const LinkModel = new mongoose.Schema({
     progress: { type: String, default: "signup" },
     list_id: { type: String, required: true },
-    email: { type: String, unique: true },
-    Category: { type: mongoose.Schema.Types.ObjectId, ref: 'catagories' },
+    email:String,
+    whatsappNumber:Number,
+    Category: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
     Title: { type: String },
     Short_description: { type: String },
     pasword: { type: String },
     Description: { type: String },
     Starting_price: { type: Number },
-    Amenities: [{ type: String }],
+    Amenities: [amenitySchema],//subschema array of object amnityid ref aminities neechy notes:String
     working_hours: [WorkingModel],
     Images: [{ type: String }],
     Cover: { type: String },
@@ -61,7 +68,9 @@ const LinkModel = new mongoose.Schema({
         min: 0,
         default: 0
     },
-    status: { type: String, default: "unblock" }
+    status: { type: String, default: "unblock" },
+    expiry_date:Date,
+    selectedsubscription:{type:mongoose.Schema.Types.ObjectId,ref:"subscriptions"}
 })
 LinkModel.index({ geometry: '2dsphere' });
 module.exports = mongoose.model('links', LinkModel)

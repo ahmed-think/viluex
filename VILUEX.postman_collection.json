@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "748caa81-f28f-48de-a31b-1d349149b37c",
+		"_postman_id": "08e57d4d-e480-462b-bf4e-5b760a9fc199",
 		"name": "VILUEX",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -23,11 +23,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/signup",
+							"raw": "localhost:4004/link/signup",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"signup"
@@ -51,11 +51,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/verify",
+							"raw": "localhost:4004/link/verify",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"verify"
@@ -79,11 +79,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/forgetpasword",
+							"raw": "localhost:4004/link/forgetpasword",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"forgetpasword"
@@ -107,11 +107,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/verifyforget",
+							"raw": "localhost:4004/link/verifyforget",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"verifyforget"
@@ -135,11 +135,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/login",
+							"raw": "localhost:4004/link/login",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"login"
@@ -174,11 +174,11 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/link/addpics",
+							"raw": "localhost:4004/link/addpics",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"addpics"
@@ -202,11 +202,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/removepics",
+							"raw": "localhost:4004/link/removepics",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"removepics"
@@ -236,11 +236,11 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/link/addcover",
+							"raw": "localhost:4004/link/addcover",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"addcover"
@@ -264,11 +264,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/removecover",
+							"raw": "localhost:4004/link/removecover",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"removecover"
@@ -292,11 +292,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/addtitle",
+							"raw": "localhost:4004/link/addtitle",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"addtitle"
@@ -320,11 +320,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/adddetails",
+							"raw": "localhost:4004/link/adddetails",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"adddetails"
@@ -340,7 +340,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\"\r\n}",
+							"raw": "{\r\n    \"id\":\"615ed5399e19e77bed78ce79\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,11 +348,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/viewsingle",
+							"raw": "localhost:4004/link/viewsingle",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"viewsingle"
@@ -376,11 +376,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/viewbycat",
+							"raw": "localhost:4004/link/viewbycat",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"viewbycat"
@@ -404,11 +404,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/addreview",
+							"raw": "localhost:4004/link/addreview",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"addreview"
@@ -432,11 +432,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/link/seereviews",
+							"raw": "localhost:4004/link/seereviews",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"link",
 								"seereviews"
@@ -447,10 +447,97 @@
 				},
 				{
 					"name": "view by filter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"listingid\":\"b29ace7e-7d19-497e-bc44-6123d01e267f\",\r\n    \"subscriptionid\":\"616ac2d483f3c33a5e0e1419\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4004/link/selectsubscription",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"link",
+								"selectsubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view all links",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4004/link/viewlinks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"link",
+								"viewlinks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Expiry Date",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"listingid\":\"b29ace7e-7d19-497e-bc44-6123d01e267f\",\r\n    \"days\":30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4004/link/generateexpirydate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"link",
+								"generateexpirydate"
+							]
+						}
 					},
 					"response": []
 				}
@@ -480,11 +567,11 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/category/addcat",
+							"raw": "localhost:4004/category/addcat",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"category",
 								"addcat"
@@ -508,11 +595,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/category/statuschange",
+							"raw": "localhost:4004/category/statuschange",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"category",
 								"statuschange"
@@ -527,11 +614,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/category/viewall",
+							"raw": "localhost:4004/category/viewall",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"category",
 								"viewall"
@@ -546,11 +633,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/category/viewadmin",
+							"raw": "localhost:4004/category/viewadmin",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"category",
 								"viewadmin"
@@ -579,11 +666,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/report/addreport",
+							"raw": "localhost:4004/report/addreport",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"report",
 								"addreport"
@@ -607,11 +694,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/report/viewsingle",
+							"raw": "localhost:4004/report/viewsingle",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"report",
 								"viewsingle"
@@ -626,14 +713,589 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/report/viewall",
+							"raw": "localhost:4004/report/viewall",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4004",
 							"path": [
 								"report",
 								"viewall"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "Add Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subscription_name\":\"Bronze\",\r\n    \"price\":20,\r\n    \"duration\":60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4004/subscription/addsubscription",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"subscription",
+								"addsubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Subcription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"616abe5db1ee5699bd3efa03\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4004/subscription/deletesubscription",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"subscription",
+								"deletesubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"616abe5db1ee5699bd3efa03\",\r\n    \"subscription_name\":\"ali\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4004/subscription/updatesubscription",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"subscription",
+								"updatesubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4004/subscription/getsubscriptions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"subscription",
+								"getsubscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Enabled Subscription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4004/subscription/showenabledsubscriptions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"subscription",
+								"showenabledsubscriptions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Touristing",
+			"item": [
+				{
+					"name": "Remove Pictures",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\",\r\n    \"pictures\":[\"9c500d20361721ece8c327ba24d22dea\",\"19d0e39e5624902cba099ac5772ba415\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/removepics",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"removepics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Cover Photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\",\r\n    \"cover\":\"d0ebef08af54467f6eb9284bae47bd8a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/removecover",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"removecover"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Pictures",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "hid",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/addpics",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"addpics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Cover Photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "hid",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/addcover",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"addcover"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Title",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\",\r\n    \"title\":\"Ahmed travels\",\r\n    \"catid\":\"6158760fe7b0ab8860501e73\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/addtitle",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"addtitle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615868fd1790ecc2113c8c76\",\r\n    \"Short_description\":\"sdasdasdas\",\r\n\"Description\":\"scasdsa\",\r\n\"Starting_price\":213,\r\n\"Amenities\":[\"sadas\"],\r\n\"working_hours\":[\r\n    {\"day\":\"monday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},\r\n{\"day\":\"tuesday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"wednesday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"thursday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"friday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"saturday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n},{\"day\":\"sunday\",\r\n\"is_opened\":true,\r\n\"opening_hour\":\"11:00\",\r\n\"closing_hour\":\"23:00\"\r\n}\r\n],\r\n\"City\":\"karachi\",\r\n\"geometry\":{\r\n    \"coordinates\":[2.331,11.222]\r\n},\r\n\"Complete_address\":\"w3dsadasd\",\r\n\"Contact_Number\":23123123,\r\n\"Tags\":[\"#dasdas\",\"#dasdaaa\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/adddetails",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"adddetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Single Touristing",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"615ed5399e19e77bed78ce79\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/viewsingle",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"viewsingle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Touristing by Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"catid\":\"6158760fe7b0ab8860501e73\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/viewbycat",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"viewbycat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"longitude\":,\r\n    \"latitude\":,\r\n    \"catid\":\"\",\r\n    \"dis\":,\r\n    \"sort\":,\r\n    \"date\":\"\",\r\n    \"higher\":\"\",\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/filter",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"filter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Status Change",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"\",\r\n    \"status\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/statuschange",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"statuschange"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/update",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/search",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Location",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"longitude\":,\r\n    \"latitude\":\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4004/touristing/searchloc",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"searchloc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4004/touristing/adcat",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"adcat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4004/touristing/ad",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"ad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View All Touristings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4004/touristing/viewtouristings",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"touristing",
+								"viewtouristings"
 							]
 						}
 					},

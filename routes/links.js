@@ -6,6 +6,7 @@ const link = require('../schema/links')
 const cat = require('../schema/category')
 const crypto = require('crypto');
 const fs = require('fs');
+const Listings=require('../listing5.json')
 const uuid = require('uuid');
 const otpGenerator = require('otp-generator')
 const multer = require('multer');
@@ -261,7 +262,8 @@ router.post('/viewsingle', (req, res) => {
 
 //view busnis by cat
 router.post('/viewbycat', (req, res) => {
-  link.find({ Category: req.body.catid })
+  var date=new Date();
+  link.find({ Category: req.body.catid ,expiry_date:{"$gte":date}})
     .exec((err, doc) => {
       if (err) {
         res.json(error(err))
@@ -533,7 +535,8 @@ router.post('/update', (req, res) => {
     })
 })
 router.post('/search',(req,res)=>{
-  link.find({ Title: { $regex: req.body.text, $options: 'i' } })
+  var date=new Date();
+  link.find({ Title: { $regex: req.body.text, $options: 'i' },expiry_date:{"$gte":date}})
   .limit(10)
   .exec((err,doc)=>{
     if(err) res.json(error(err))
@@ -551,8 +554,10 @@ router.post('/search',(req,res)=>{
 })
 
 router.post('/searchloc',(req,res)=>{
+  var date=new Date();
   if (req.body.longitude !== undefined && req.body.latitude !== undefined) {
           let { longitude, latitude } = req.body
+          
           link.find({
             geometry: {
               $nearSphere: {
@@ -564,7 +569,7 @@ router.post('/searchloc',(req,res)=>{
                 $maxDistance: 25 * 1000,
               },
             },
-          })
+          expiry_date:{"$gte":date}})
             .limit(8)
             .exec((err, docs) => {
               if (err) return res.json(error(err));
@@ -575,6 +580,7 @@ router.post('/searchloc',(req,res)=>{
         }
 })
 let bulk=require('../MOCK_DATA.json')
+const handleErr = require('../handle function/error')
 //BULK ROUTE
 router.get('/adcat',(req,res)=>{
 cat.find()
@@ -668,6 +674,109 @@ router.get('/c',(req,res)=>{
   .exec((err,doc)=>{
     if(err) res.send(err)
     else res.send(doc)
+  })
+})
+
+router.post('/selectsubscription',(req,res)=>{
+  let id=req.body.listingid
+  console.log(id)
+  link.findOneAndUpdate({"list_id":id},{selectedsubscription:req.body.subscriptionid,progress:"subscription"},{new:true},(err,doc)=>{
+    if(err){
+      return res.json(error(err))
+    }
+    else{
+      return res.json(success(doc))
+    }
+  })
+})
+
+//view links
+router.get('/viewlinks',(req,res)=>{
+  var date=new Date();
+  // console.log(date)
+  link.find({expiry_date:{"$gte":date}},(err,doc)=>{
+      if(err){
+          return res.json(error(err))
+      }
+      else{
+          return res.json(success(doc))
+      }
+  })
+})
+
+//view all links
+router.get('/viewalllinks',(req,res)=>{
+  var date=new Date();
+  // console.log(date)
+  link.find({},(err,doc)=>{
+      if(err){
+          return res.json(error(err))
+      }
+      else{
+          return res.json(success(doc))
+      }
+  })
+})
+
+//generate expiry date
+router.post('/generateexpirydate',(req,res)=>{
+  let duration=req.body.days
+  var date=new Date();
+    date.setDate(date.getDate()+duration);
+    // console.log('date:',date,"duration:",duration)
+    let id=req.body.listingid
+    link.findOneAndUpdate({"list_id":id},{expiry_date:date,progress:"completed"},{new:true},(err,doc)=>{
+      if(err){
+        return res.json(error(err))
+    }
+    else{
+        return res.json(success(doc))
+    }
+    })
+})
+
+router.post('/addbulklistingstocategories',(req,res)=>{
+  
+      Listings.forEach(ele=>{
+        let data=
+        {
+        list_id: ele.list_id,
+        email: ele.email,
+        whatsappNumber:ele.whatsappNumber,
+        Category:ele.Category,
+        Title:ele.Title,
+        Short_description:ele.Short_description,
+        Description: ele.Description,
+        Starting_price: ele.Starting_price,
+        Cover:ele.Cover,
+        City: ele.City,
+        geometry: {coordinates:[ele.Latitude,ele.Longitude]},
+        Complete_address:ele.Complete_Address,
+        Contact_Number: ele.Contact_Number,
+        ratings:ele.ratings
+      }
+      link.create(data,(err,doc)=>{
+        if(err){
+          return res.json(error(err))
+        }
+        else{
+          //i.push(doc)
+        }
+      })
+    })
+      setTimeout(() => {
+        return res.json({message:"Success"})
+      }, 20000);
+})
+
+router.post('/viewlinksbycategoryid',(req,res)=>{
+  link.find({Category:req.body.categoryId},(err,doc)=>{
+    if(err){
+      return res.json(error(err))
+    }
+    else{
+      return res.json(success(doc))
+    }
   })
 })
 module.exports = router
