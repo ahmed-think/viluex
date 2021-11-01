@@ -1,6 +1,7 @@
 const mongoose=require('mongoose')
 
 const ReportModel=new mongoose.Schema({
+    name:String,
     reason:{type:String},
 comments:{type:String},
 email:{type:String,required:true},

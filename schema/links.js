@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const ReviewModel = new mongoose.Schema({
+    name:String,
     email: { type: String },
     rating: {
         type: Number,
@@ -69,6 +70,7 @@ const LinkModel = new mongoose.Schema({
         default: 0
     },
     status: { type: String, default: "unblock" },
+    isSubscribed:{type:Boolean,default:true},
     expiry_date:Date,
     selectedsubscription:{type:mongoose.Schema.Types.ObjectId,ref:"subscriptions"}
 })

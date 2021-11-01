@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const subroutes=require('./routes/Subscription')
 const touristingroutes=require('./routes/Touristing')
 const amenityroutes=require('./routes/Amenities')
+const cron = require('node-cron');
 const homeroutes=require('./routes/Home')
 
 const mongoDB='mongodb://viluexasasaddsad:dasd8as9DsdaASDADsas9d@75.119.139.19:27913/viluex';
@@ -68,6 +69,21 @@ app.get('/home',(req,res)=>{
         }
     })
 })
+
+cron.schedule('* * * * *', function() {
+  console.log('har minute pe check karo isSubscribed true wali listing ko or agr expiryddate braber ho ya choti ho aj ki date se toh usse isSubscribed false karde');
+              var date=new Date();
+          
+                  link.updateMany({$and:[{expiry_date:{$lte:date}},{isSubscribed:true}]} ,{isSubscribed:false,selectedsubscription:null,expiry_date:null},{new:true},(err,doc)=>{
+                      if(err){
+                          console.log({message:"Failed",err})
+                      }
+                      else{
+                          console.log("removed subscription",doc)
+                      }
+                  })
+ 
+});
 
 const PORT = process.env.PORT || 4004
 app.listen(PORT, () => { console.log(`Server started at port ${PORT}`) })

@@ -67,6 +67,7 @@ router.post('/verify', (req, res) => {
       else {
         if (doc.otp == req.body.otp) {
           let data = {
+            progress:"verified",
             email: req.body.email,
             list_id:uuid.v4()
           }
@@ -81,12 +82,30 @@ router.post('/verify', (req, res) => {
       }
     })
 })
-router.post('/getpasword',(req,res)=>{
-  link.findByIdAndUpdate(req.body.id,{pasword:encrypt(req.body.pass)},{new:true})
-  .exec((err,doc)=>{
-    if(err) res.json(error(err))
-    else res.json(success(doc))
+router.post('/setpassword',(req,res)=>{
+  if(req.body.id && req.body.newpassword && req.body.confirmpassword && req.body.newpassword===req.body.confirmpassword)
+  {
+    link.findByIdAndUpdate(req.body.id,{pasword:encrypt(req.body.confirmpassword)},{new:true})
+    .exec((err,doc)=>{
+    if(err)
+    {
+      res.json(error(err))
+    }
+    else 
+    {
+      res.json(success(doc))
+    }
   })
+}
+else if(req.body.newpassword){
+  return res.json(error("Please Enter Confirm Password "))
+}
+else if(req.body.confirmpassword){
+  return res.json(error("Please Enter New Password "))
+}
+else{
+  return res.json(error("Please Enter New Password and Confirm Password"))
+}
 })
 router.post('/forgetpasword', (req, res) => {
   if (req.body.email !== null) {
@@ -129,7 +148,18 @@ router.post('/verifyforget', (req, res) => {
       if (err) res.json({ msg: "failed finding otp", data: err });
       else {
         if (doc.otp == req.body.otp) {
-          res.json(success("otp verified"))
+          // res.json(success("otp verified"))
+          let data = {
+            email: req.body.email,
+            pasword:encrypt(req.body.pass)
+          }
+          link.findOneAndUpdate({"email":req.body.email},{pasword:data.pasword},{new:true}, (er, dc) => {
+            if (er) {
+              res.json(error(er))
+            } else {
+              res.json(success(dc))
+            }
+          })
         }
       }
     })
@@ -226,8 +256,9 @@ router.post('/addcover', upload.single('image'), (req, res) => {
     })
 })
 
-router.post('/addtitle', (req, res) => {
-  link.findByIdAndUpdate(req.body.id, { Title: req.body.title, Category: req.body.catid }, { new: true })
+router.post('/addDetails', (req, res) => {
+  data=req.body
+  link.findByIdAndUpdate(data.id,data,{ new: true })
     .exec((err, doc) => {
       if (err) {
         res.json(error(err))
@@ -237,17 +268,17 @@ router.post('/addtitle', (req, res) => {
     })
 })
 
-router.post('/adddetails', (req, res) => {
+// router.post('/adddetails', (req, res) => {
  
-  link.findByIdAndUpdate(req.body.id, req.body, { new: true })
-    .exec((err, doc) => {
-      if (err) {
-        res.json(error(err))
-      } else {
-        res.json(success(doc))
-      }
-    })
-})
+//   link.findByIdAndUpdate(req.body.id, req.body, { new: true })
+//     .exec((err, doc) => {
+//       if (err) {
+//         res.json(error(err))
+//       } else {
+//         res.json(success(doc))
+//       }
+//     })
+// })
 
 router.post('/viewsingle', (req, res) => {
   link.findById(req.body.id)
@@ -282,7 +313,7 @@ router.post('/seereviews', (req, res) => {
     })
 })
 router.post('/addreview', (req, res) => {
-  link.findById(req.body.linkid)
+  link.findById(req.body.listid)
     .exec((er, info) => {
       if (er) res.json(error(er))
       else {
@@ -441,7 +472,7 @@ var time = today.getHours()
             coordinates: [longitude, latitude], //longitude and latitude
           },
           $minDistance: 0,
-          $maxDistance: req.body.dis * 1000,
+          $maxDistance: req.body.distance * 1000,
         },
       },
       // "$working_hours.day":day,
@@ -579,14 +610,14 @@ router.post('/searchloc',(req,res)=>{
             .exec((err, docs) => {
               if (err) return res.json(error(err));
               else {
-                let addrs=doc.map(element=>{
+                let addrs=docs.map(element=>{
                 return{
                   name:element.Title,
                   longitude:element.geometry.coordinates[0],
                   latitude:element.geometry.coordinates[1]
                 }
               })
-              res.json(success({addrs,doc}))}
+              res.json(success({addrs,docs}))}
             });
         } else {
           return res.json(error('Location can not be null'))
@@ -594,6 +625,8 @@ router.post('/searchloc',(req,res)=>{
 })
 let bulk=require('../MOCK_DATA.json')
 const handleErr = require('../handle function/error')
+const Subscription = require('../schema/Subscription')
+const category = require('../schema/category')
 //BULK ROUTE
 router.get('/adcat',(req,res)=>{
 cat.find()
@@ -748,34 +781,85 @@ router.post('/generateexpirydate',(req,res)=>{
     })
 })
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
 router.post('/addbulklistingstocategories',(req,res)=>{
   
       Listings.forEach(ele=>{
-        let data=
-        {
-        list_id: ele.list_id,
-        email: ele.email,
-        whatsappNumber:ele.whatsappNumber,
-        Category:ele.Category,
-        Title:ele.Title,
-        Short_description:ele.Short_description,
-        Description: ele.Description,
-        Starting_price: ele.Starting_price,
-        Cover:ele.Cover,
-        City: ele.City,
-        geometry: {coordinates:[ele.Latitude,ele.Longitude]},
-        Complete_address:ele.Complete_Address,
-        Contact_Number: ele.Contact_Number,
-        ratings:ele.ratings
-      }
-      link.create(data,(err,doc)=>{
-        if(err){
-          return res.json(error(err))
-        }
-        else{
-          //i.push(doc)
-        }
-      })
+        Subscription.findById(ele.selectedsubscription,(err,doc)=>{
+          if(err){
+            return res.json(error(err))
+          }
+          else{
+            var date=new Date();
+            date.setDate(date.getDate()+doc.duration);
+            let data=
+            {
+            list_id: ele.list_id,
+            email: ele.email,
+            whatsappNumber:ele.whatsappNumber,
+            Category:ele.Category,
+            Title:ele.Title,
+            Short_description:ele.Short_description,
+            Description: ele.Description,
+            Starting_price: ele.Starting_price,
+            working_hours:[
+              {"day":"monday",
+          "is_opened":true,
+          "opening_hour":Math.floor(Math.random() * 12),
+          "closing_hour":getRandomInt(13,24)
+          },
+          {"day":"tuesday",
+          "is_opened":true,
+          "opening_hour":Math.floor(Math.random() * 12),
+          "closing_hour":getRandomInt(13,24)
+          },{"day":"wednesday",
+          "is_opened":true,
+          "opening_hour":Math.floor(Math.random() * 12),
+          "closing_hour":getRandomInt(13,24)
+          },{"day":"thursday",
+          "is_opened":true,
+          "opening_hour":Math.floor(Math.random() * 12),
+          "closing_hour":getRandomInt(13,24)
+          },{"day":"friday",
+          "is_opened":true,
+          "opening_hour":Math.floor(Math.random() * 12),
+          "closing_hour":getRandomInt(13,24)
+          },{"day":"saturday",
+          "is_opened":true,
+          "opening_hour":Math.floor(Math.random() * 12),
+          "closing_hour":getRandomInt(13,24)
+          },{"day":"sunday",
+          "is_opened":true,
+          "opening_hour":Math.floor(Math.random() * 12),
+          "closing_hour":getRandomInt(13,24)
+          }
+          ],
+            Cover:ele.Cover,
+            City: ele.City,
+            geometry: {coordinates:[ele.Longitude,ele.Latitude]},
+            Complete_address:ele.Complete_Address,
+            Contact_Number: ele.Contact_Number,
+            ratings:ele.ratings,
+            selectedsubscription:ele.selectedsubscription,
+            expiry_date:date
+          }
+          link.create(data,(err,doc)=>{
+            if(err){
+              return res.json(error(err))
+            }
+            else{
+              //i.push(doc)
+            }
+          })
+          }
+        })
+
+       
     })
       setTimeout(() => {
         return res.json({message:"Success"})
@@ -789,6 +873,64 @@ router.post('/viewlinksbycategoryid',(req,res)=>{
     }
     else{
       return res.json(success(doc))
+    }
+  })
+})
+
+router.post('/removealisting',(req,res)=>{
+  link.findByIdAndDelete(req.body.id,(err,doc)=>{
+    if(err){
+      return res.json(error(err))
+    }
+    else{
+      return res.json(success(doc))
+    }
+  })
+})
+
+router.post('/searchbycity',(req,res)=>{
+  link.find({City:req.body.city},(err,doc)=>{
+    if(err){
+      return res.json(error(err))
+    }
+    else{
+      return res.json(success(doc))
+    }
+  })
+})
+
+
+function randomArray(unshuffled){
+  return unshuffled
+  .map((value) => ({ value, sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(({ value }) => value)
+}
+
+router.post('/addimagestocategories',upload.array('image'),(req,res)=>{
+  var files = req.files
+  var names = files.map(file => {
+    return file.filename
+  })
+  link.find({},(err,docc)=>{
+    if(err){
+      return res.json(error(err))
+    }
+    else{
+      docc.forEach(a=>{
+        
+        link.findByIdAndUpdate(a._id,{Images:randomArray(names)},{new:true},(err,doc)=>{
+          if(err){
+            return res.json(error(err))
+          }
+          else{
+            // return res.json(success(doc))
+          }
+        })
+      })//foreach band
+      setTimeout(() => {
+        return res.json(success("success"))
+      }, 20000);
     }
   })
 })

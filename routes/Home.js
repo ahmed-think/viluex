@@ -22,14 +22,14 @@ router.post('/getall',(req,res)=>{
                     }
                     else{
                         
-                        links.find({ geometry: {
+                        links.find( {geometry: {
                             $nearSphere: {
                               $geometry: {
                                 type: 'Point',
-                                coordinates: [req.body.latitude, req.body.longitude], //longitude and latitude
+                                coordinates: [req.body.longitude, req.body.latitude], //longitude and latitude
                               },
                               $minDistance: 0,
-                              $maxDistance: 25 * 1000,
+                              $maxDistance: 10 * 1000,
                             },
                           }}).limit(7).exec((err,nearby)=>{
                             if(err){
@@ -64,6 +64,42 @@ router.post('/getall',(req,res)=>{
     }
     else{
         console.log("yellow")
+        category.find({}).limit(7).exec((err,category)=>{
+            if(err){
+                return res.json(handleErr(err))
+            }
+            else{
+               
+                links.find({}).sort({ratings:-1}).limit(7).exec((err,toprated)=>{
+                    if(err){
+                        return res.json(handleErr(err))
+                    }
+                        
+                       
+                            else{
+                                
+                                links.find({}).sort({created_date:-1}).limit(7).exec((err,newlyadded)=>{
+                                    if(err){
+                                        return res.json(handleErr(err))
+                                    }
+                                    else{
+                                        //links
+                                        // return res.json(handleSuccess(links))
+                                        Touristing.find({}).limit(7).exec((err,touristing)=>{
+                                            if(err){
+                                                return res.json(handleErr(err))
+                                            }
+                                            else{
+                                                return res.json(handleSuccess({category,toprated,newlyadded,touristing}))
+                                
+                                            }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
     }
 })
 
